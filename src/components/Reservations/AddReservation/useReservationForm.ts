@@ -99,12 +99,26 @@ const useReservationForm = (
     if (range?.from && range?.to) {
       const fromDateValue = format(range.from, 'dd-MM-y')
       const toDateValue = format(range.to, 'dd-MM-y')
-      const NewValue = {
-        ...formInputData,
-        fromDate: fromDateValue,
-        toDate: toDateValue,
+      const pickedDateRange = { from: range.from, to: range.to }
+
+      // check if the range contains booked days and if so clear the selection
+      const isSelectedRangeValid = Object.values(bookedDays).every(
+        (bookedDateRange) =>
+          (isBefore(pickedDateRange.from, bookedDateRange.from) &&
+            isBefore(pickedDateRange.to, bookedDateRange.to)) ||
+          (isAfter(pickedDateRange.from, bookedDateRange.from) &&
+            isAfter(pickedDateRange.to, bookedDateRange.to))
+      )
+      if (isSelectedRangeValid) {
+        const NewValue = {
+          ...formInputData,
+          fromDate: fromDateValue,
+          toDate: toDateValue,
+        }
+        setFormInputData(NewValue)
+      } else {
+        setFormInputData({ ...formInputData, fromDate: '', toDate: '' })
       }
-      setFormInputData(NewValue)
     } else {
       setFormInputData({ ...formInputData, fromDate: '', toDate: '' })
     }
