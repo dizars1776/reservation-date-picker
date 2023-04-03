@@ -1,7 +1,11 @@
 import { MouseEventHandler } from 'react'
 import { Link } from 'react-router-dom'
 
-const FormControlBtns = ({ handleFormSubmit }: {handleFormSubmit: MouseEventHandler}) => {
+const FormControlBtns = ({
+  handleFormSubmit,
+}: {
+  handleFormSubmit: MouseEventHandler
+}) => {
   return (
     <div className='container mx-auto px-4 flex flex-col items-center my-4'>
       <div className='shadow-md shadow-black w-fit'>

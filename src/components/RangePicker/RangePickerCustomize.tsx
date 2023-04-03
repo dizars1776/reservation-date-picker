@@ -19,7 +19,7 @@ const css = `
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
-  .my-disabled {
+  .my-booked {
     background-color: #ff6b6b;
     opacity: 1 !important;
     border-radius: 0% !important;

@@ -5,7 +5,7 @@ type Reservation = {
   toDate: string
 }
 
-type ReservationList = ReservationObj[]
+type ReservationList = Reservation[]
 
 // Range Picker Component Definitions
 interface Input {
@@ -15,15 +15,15 @@ interface Input {
   fromDate: string
   toDate: string
   selectedRange: DateRange | undefined
-  reservations: ReservetionsArray
+  bookedDays: BookedDayList
 }
 
-type DisabledDay = {
+type BookedDay = {
   from: Date
   to: Date
 }
 
-type DisabledDaysList = DisabledDay[]
+type BookedDayList = BookedDay[]
 
 //Reservetions Component Definitions
 type NameInput = {
@@ -33,7 +33,7 @@ type NameInput = {
 
 interface ReservationsWithHandler {
   reservations: ReservationList
-  hasReservationHandler: any
+  hasReservationHandler: (arg0: ReservationList) => void
 }
 
 interface ReservationWithIndex extends ReservationsWithHandler {

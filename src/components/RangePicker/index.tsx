@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { DayPicker } from 'react-day-picker'
 import {
   CustomCaption,
@@ -15,25 +14,8 @@ const RangePicker = ({
   handleFromDateChange,
   handleToDateChange,
   handleRangeSelect,
-  reservations,
+  bookedDays,
 }: Input) => {
-  const [disabledDays, setDisabledDays] = useState<DisabledDaysList>([])
-
-  // disable the already reserved days
-  useEffect(() => {
-    const disabledDays: DisabledDaysList = []
-    reservations.forEach((reservation: Reservation) => {
-      const [fromDay, fromMonth, fromYear] = reservation.fromDate.split('-')
-      const [toDay, toMonth, toYear] = reservation.toDate.split('-')
-      const newDisabledRange = {
-        from: new Date(+fromYear, +fromMonth - 1, +fromDay),
-        to: new Date(+toYear, +toMonth - 1, +toDay),
-      }
-      disabledDays.push(newDisabledRange)
-    })
-    setDisabledDays(disabledDays)
-  }, [])
-
   return (
     <>
       <style>{css}</style>
@@ -46,11 +28,14 @@ const RangePicker = ({
           mode='range'
           selected={selectedRange}
           onSelect={handleRangeSelect}
+          modifiers={{ booked: bookedDays }}
+          // modifiersStyles={{ booked: bookedStyle }}
           modifiersClassNames={{
             selected: 'my-selected',
             disabled: 'my-disabled',
+            booked: 'my-booked',
           }}
-          disabled={disabledDays}
+          disabled={bookedDays} //  booked + disabled
         />
       </div>
       <div className='flex flex-row justify-start items-center my-1 sm:text-lg lg:text-xl'>
@@ -69,7 +54,7 @@ const RangePicker = ({
             className='text-center sm:w-40'
             disabled
           />
-          <span className='px-2'>-</span>
+          <span className='sm:mx-2'>-</span>
           <label id='toDate' htmlFor='toDate' hidden>
             To Date
           </label>

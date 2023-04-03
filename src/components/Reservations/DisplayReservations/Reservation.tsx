@@ -15,7 +15,9 @@ const Reservation = ({
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     //get the reservation's id
     const reservationId = Number(
-      (e.currentTarget as HTMLButtonElement).parentElement?.parentElement?.getAttribute('id')
+      (
+        e.currentTarget as HTMLButtonElement
+      ).parentElement?.parentElement?.getAttribute('id')
     )
     // delete the reservation
     const newReservationsValue = reservations.filter(

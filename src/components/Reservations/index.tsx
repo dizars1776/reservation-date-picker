@@ -1,7 +1,10 @@
 import DisplayReservations from './DisplayReservations'
 import Header from './Header'
 
-const Reservations = ({ reservations, hasReservationHandler }: ReservationsWithHandler) => {
+const Reservations = ({
+  reservations,
+  hasReservationHandler,
+}: ReservationsWithHandler) => {
   return (
     <>
       <Header header='Reservations' link='/add-reservation' hasBtn />
